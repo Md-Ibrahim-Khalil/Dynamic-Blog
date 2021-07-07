@@ -43,29 +43,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $category)
-                                        <tr>
-                                            <td>{{ $category->id }}</td>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $category->slug }}</td>
-                                            <td>
-                                                {{ $category->id }}
-                                            </td>
-                                            <td class="d-flex">
-                                                <a href="{{ route('category.edit', [$category->id]) }}"
-                                                    class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
-                                                <form action="{{ route('category.destroy', [$category->id]) }}"
-                                                    class="mr-1" method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-sm btn-danger"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </form>
-                                                {{-- <a href="{{ route('category.show', [$category->id]) }}"
+                                    @if ($categories->count())
+                                        @foreach ($categories as $category)
+                                            <tr>
+                                                <td>{{ $category->id }}</td>
+                                                <td>{{ $category->name }}</td>
+                                                <td>{{ $category->slug }}</td>
+                                                <td>
+                                                    {{ $category->id }}
+                                                </td>
+                                                <td class="d-flex">
+                                                    <a href="{{ route('category.edit', [$category->id]) }}"
+                                                        class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
+                                                    <form action="{{ route('category.destroy', [$category->id]) }}"
+                                                        class="mr-1" method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-sm btn-danger"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </form>
+                                                    {{-- <a href="{{ route('category.show', [$category->id]) }}"
                                                     class="btn btn-sm btn-success mr-1"><i class="fas fa-eye"></i></a> --}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="5">
+                                                <h5 class="text-center">No Categories Found.</h5>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
