@@ -7,13 +7,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Edit Category</h1>
+                    <h1 class="m-0">Edit Post</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('category.index') }}">Category List</a></li>
-                        <li class="breadcrumb-item active">Edit Category</li>
+                        <li class="breadcrumb-item active"><a href="{{ route('post.index') }}">Post List</a></li>
+                        <li class="breadcrumb-item active">Edit Post</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -27,8 +27,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h3 class="card-title">Edit Category - {{ $category->name }}</h3>
-                                <a href="{{ route('category.index') }}" class="btn btn-primary">Go Back To Category
+                                <h3 class="card-title">Edit Post {{ $post->name }}</h3>
+                                <a href="{{ route('post.index') }}" class="btn btn-primary">Go Back To Post
                                     List</a>
                             </div>
                         </div>
@@ -36,26 +36,46 @@
                         <div class="card-body p-0">
                             <div class="row">
                                 <div class="col-12 col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-                                    <form action="{{ route('category.update', [$category->id]) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="card-body">
-                                            @include('includes.errors')
-                                            <div class="form-group">
-                                                <label for="name">Category Name</label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="{{ $category->name }}" placeholder="Enter Name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Description</label>
-                                                <textarea name="description" id="description" rows="4" class="form-control"
-                                                    placeholder="Enter Description">{{ $category->description }}</textarea>
+                                    <div class="card-body">
+                                        @include('includes.errors')
+                                        <div class="form-group">
+                                            <label for="name">Post Title</label>
+                                            <input type="name" class="form-control" id="title" value="{{ $post->title }}"
+                                                name="title" placeholder="Enter Title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="category">Post Category</label>
+                                            <select name="category" id="category" class="form-control">
+                                                <option value="" style="display: none" selected>Select Category</option>
+                                                @foreach ($categories as $c)
+                                                    <option value="{{ $c->id }}" @if ($post->category_id == $c->id) selected @endif>{{ $c->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <label for="image">Image</label>
+                                                    <div class="custom-file">
+                                                        <input type="file" name="image" class="custom-file-input"
+                                                            id="image">
+                                                        <label class="custom-file-label" for="image">Choose File</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 text-right">
+                                                    <div
+                                                        style="max-width: 100px; max-height:100px; overflow:hidden; margin-left: auto">
+                                                        <img src="{{ asset($post->image) }}" class="img-fluid" alt="">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="card-footer">
-                                            <button type="submit" class="btn btn-lg btn-primary">Update Category</button>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Description</label>
+                                            <textarea name="description" id="description" rows="4" class="form-control"
+                                                placeholder="Enter Description">{{ $post->description }}</textarea>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

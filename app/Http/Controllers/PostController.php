@@ -60,6 +60,15 @@ class PostController extends Controller
             'published_at' => Carbon::now(),
         ]);
 
+        if ($request->has('image')) {
+
+            $image = $request->image;
+            $image_new_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->move('storage/post/', $image_new_name);
+            $post->image = '/storage/post/' . $image_new_name;
+            $post->save();
+        }
+
         Session::flash('success', 'Post Created Successfully');
         return redirect()->back();
     }
@@ -83,7 +92,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        return view('admin.post.edit', compact(['post', 'categories']));
     }
 
     /**
