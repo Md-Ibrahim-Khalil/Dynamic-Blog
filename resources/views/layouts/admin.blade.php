@@ -244,7 +244,7 @@
                         </li>
                         <li class="nav-item mt-auto">
                             <a href="{{ route('post.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-tag"> </i>
+                                <i class="nav-icon fas fa-pen-square"> </i>
                                 <p>
                                     Post
                                 </p>

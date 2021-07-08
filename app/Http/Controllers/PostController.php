@@ -60,7 +60,7 @@ class PostController extends Controller
             'published_at' => Carbon::now(),
         ]);
 
-        if ($request->has('image')) {
+        if ($request->hasFile('image')) {
 
             $image = $request->image;
             $image_new_name = time() . '.' . $image->getClientOriginalExtension();
@@ -105,7 +105,32 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        // dd($request->all());
+        $this->validate($request, [
+            'title' => "required|unique:posts,title, $post->id",
+            'image' => 'required|image',
+            'description' => 'required',
+            'category' => 'required',
+        ]);
+
+
+        $post->title = $request->title;
+        $post->slug = Str::slug($request->title);
+        $post->description = $request->description;
+        $post->category_id = $request->category;
+
+        if ($request->hasFile('image')) {
+
+            $image = $request->image;
+            $image_new_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->move('storage/post/', $image_new_name);
+            $post->image = '/storage/post/' . $image_new_name;
+        }
+
+        $post->save();
+
+        Session::flash('success', 'Post Updated Successfully');
+        return redirect()->back();
     }
 
     /**
@@ -116,6 +141,14 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if ($post) {
+            if (file_exists(public_path($post->image))) {
+                unlink(public_path($post->image));
+            }
+
+            $post->delete();
+            Session::flash('success', 'Post Deleted Successfully');
+        }
+        return redirect()->back();
     }
 }
