@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Session;
+use App\Tag;
 use App\Category;
 use App\Post;
 use Illuminate\Support\Carbon;
@@ -29,8 +30,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        $tags = Tag::all();
         $categories = Category::all();
-        return view('admin.post.create', compact('categories'));
+        return view('admin.post.create', compact(['categories', 'tags']));
     }
 
     /**
@@ -41,6 +43,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'title' => 'required|unique:posts,title',
             'image' => 'required|image',
@@ -48,7 +51,6 @@ class PostController extends Controller
             'category' => 'required',
         ]);
 
-        // dd($request->all());
 
         $post = Post::create([
             'title' => $request->title,
@@ -60,13 +62,15 @@ class PostController extends Controller
             'published_at' => Carbon::now(),
         ]);
 
-        if ($request->hasFile('image')) {
+        $post->tags()->attach($request->tags);
 
+        if ($request->hasFile('image')) {
             $image = $request->image;
             $image_new_name = time() . '.' . $image->getClientOriginalExtension();
             $image->move('storage/post/', $image_new_name);
             $post->image = '/storage/post/' . $image_new_name;
             $post->save();
+            // $post->getResource()->save($post);
         }
 
         Session::flash('success', 'Post Created Successfully');
@@ -92,8 +96,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $tags = Tag::all();
         $categories = Category::all();
-        return view('admin.post.edit', compact(['post', 'categories']));
+        return view('admin.post.edit', compact(['post', 'categories', 'tags']));
     }
 
     /**
@@ -108,7 +113,7 @@ class PostController extends Controller
         // dd($request->all());
         $this->validate($request, [
             'title' => "required|unique:posts,title, $post->id",
-            'image' => 'required|image',
+            // 'image' => 'required|image',
             'description' => 'required',
             'category' => 'required',
         ]);
@@ -119,8 +124,9 @@ class PostController extends Controller
         $post->description = $request->description;
         $post->category_id = $request->category;
 
-        if ($request->hasFile('image')) {
+        $post->tags()->sync($request->tags);
 
+        if ($request->hasFile('image')) {
             $image = $request->image;
             $image_new_name = time() . '.' . $image->getClientOriginalExtension();
             $image->move('storage/post/', $image_new_name);

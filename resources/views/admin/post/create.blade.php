@@ -62,6 +62,17 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                @foreach ($tags as $tag)
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="tag{{ $tag->id }}" name="tags[]"
+                                                            value="{{ $tag->id }}">
+                                                        <label for="tag{{ $tag->id }}"
+                                                            class="custom-control-label">{{ $tag->name }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="exampleInputPassword1">Description</label>
                                                 <textarea name="description" id="description" rows="4" class="form-control"
                                                     placeholder="Enter Description">{{ old('description') }}</textarea>

@@ -75,23 +75,37 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Description</label>
-                                                <textarea name="description" id="description" rows="4" class="form-control"
-                                                    placeholder="Enter Description">{{ $post->description }}</textarea>
+                                                @foreach ($tags as $tag)
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="tag{{ $tag->id }}" name="tags[]"
+                                                            value="{{ $tag->id }}" @foreach ($post->tags as $t) 
+                                                            @if ($tag->id==$t->id) checked @endif
+                                                @endforeach>
+
+                                                <label for="tag{{ $tag->id }}"
+                                                    class="custom-control-label">{{ $tag->name }}</label>
                                             </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-lg btn-primary">Update Post</button>
-                                            </div>
-                                        </form>
+                                            @endforeach
                                     </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Description</label>
+                                        <textarea name="description" id="description" rows="4" class="form-control"
+                                            placeholder="Enter Description">{{ $post->description }}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-lg btn-primary">Update Post</button>
+                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.card-body -->
                     </div>
+                    <!-- /.card-body -->
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 @endsection
