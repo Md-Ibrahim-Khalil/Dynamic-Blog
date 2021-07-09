@@ -34,7 +34,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table class="table table-bordered table-primary">
+                            <table class="table table-bordered">
                                 <tbody>
                                     <tr>
                                         <th style="max-width: 200px">Image</th>
