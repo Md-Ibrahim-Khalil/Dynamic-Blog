@@ -52,7 +52,7 @@
                                                     placeholder="Enter Email" value="{{ $user->email }}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="password">User Password<small>(Enter password if you want to change.)</small></label>
+                                                <label for="password">User Password<small class="text-info">(Enter password if you want to change.)</small></label>
                                                 <input type="password" class="form-control" id="password" name="password"
                                                     placeholder="Enter Password">
                                             </div>
