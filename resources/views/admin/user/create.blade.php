@@ -7,13 +7,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Category</h1>
+                    <h1 class="m-0">Create User</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('category.index') }}">Category List</a></li>
-                        <li class="breadcrumb-item active">Create Category</li>
+                        <li class="breadcrumb-item active"><a href="{{ route('user.index') }}">Users List</a></li>
+                        <li class="breadcrumb-item active">Create User</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -27,8 +27,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h3 class="card-title">Create Category</h3>
-                                <a href="{{ route('category.index') }}" class="btn btn-primary">Go Back To Category
+                                <h3 class="card-title">Create User</h3>
+                                <a href="{{ route('user.index') }}" class="btn btn-primary">Go Back To Users
                                     List</a>
                             </div>
                         </div>
@@ -36,19 +36,24 @@
                         <div class="card-body p-0">
                             <div class="row">
                                 <div class="col-12 col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-                                    <form action="{{ route('category.store') }}" method="POST">
+                                    <form action="{{ route('user.store') }}" method="POST">
                                         @csrf
                                         <div class="card-body">
                                             @include('includes.errors')
                                             <div class="form-group">
-                                                <label for="name">Category Name</label>
+                                                <label for="name">User Name</label>
                                                 <input type="text" class="form-control" id="name" name="name"
                                                     placeholder="Enter Name">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Description</label>
-                                                <textarea name="description" id="description" rows="4" class="form-control"
-                                                    placeholder="Enter Description"></textarea>
+                                                <label for="email">User Email</label>
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                    placeholder="Enter Email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password">User Password</label>
+                                                <input type="password" class="form-control" id="password" name="password"
+                                                    placeholder="Enter Password">
                                             </div>
                                         </div>
                                         <div class="card-footer">

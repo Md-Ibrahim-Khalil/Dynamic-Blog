@@ -47,8 +47,8 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email', $user->id,
-            'password' => 'sometimes|min:8',
+            'email' => "required|email|unique:users,email, $user->id",
+            'password' => 'sometimes|nullable|min:8',
         ]);
 
         $user->name = $request->name;

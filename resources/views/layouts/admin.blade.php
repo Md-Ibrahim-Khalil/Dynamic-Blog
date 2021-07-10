@@ -252,6 +252,14 @@
                             </a>
                         </li>
                         <li class="nav-item mt-auto">
+                            <a href="{{ route('user.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user"> </i>
+                                <p>
+                                    User
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item mt-auto">
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                 class="nav-link">
