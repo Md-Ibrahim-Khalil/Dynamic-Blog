@@ -34,39 +34,87 @@
                         <div class="row">
                             <div class="col-12 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
                                 <div class="card-body">
-                                    <form action="{{ route('post.update', [$setting->id]) }}" method="POST"
+                                    <form action="{{ route('setting.update') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         @include('includes.errors')
                                         <div class="form-group">
-                                            <label for="name">Post Title</label>
-                                            <input type="name" class="form-control" id="title"
-                                                value="{{ $setting->title }}" name="title" placeholder="Enter Title">
+                                            <label for="name">Site Name</label>
+                                            <input type="name" class="form-control" id="name"
+                                                value="{{ $setting->name }}" name="name" placeholder="Enter Title">
                                         </div>
-
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="facebook">Facebook</label>
+                                                    <input type="facebook" class="form-control" id="facebook"
+                                                        value="{{ $setting->facebook }}" name="facebook"
+                                                        placeholder="Facebook Url">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="twitter">Twitter</label>
+                                                    <input type="twitter" class="form-control" id="twitter"
+                                                        value="{{ $setting->twitter }}" name="twitter"
+                                                        placeholder="Twitter Url">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="instagram">Instragram</label>
+                                                    <input type="instagram" class="form-control" id="instagram"
+                                                        value="{{ $setting->instagram }}" name="instagram"
+                                                        placeholder="Instagram Url">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="reddit">Reddit</label>
+                                                    <input type="reddit" class="form-control" id="reddit"
+                                                        value="{{ $setting->reddit }}" name="reddit"
+                                                        placeholder="Reddit Url">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="email" class="form-control" id="email"
+                                                        value="{{ $setting->email }}" name="email"
+                                                        placeholder="Email Url">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="copyright">Copyright</label>
+                                                    <input type="copyright" class="form-control" id="copyright"
+                                                        value="{{ $setting->copyright }}" name="copyright"
+                                                        placeholder="Copyright">
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-8">
-                                                    <label for="image">Image</label>
+                                                    <label for="logo">Site Logo</label>
                                                     <div class="custom-file">
-                                                        <input type="file" name="image" class="custom-file-input"
-                                                            id="image">
-                                                        <label class="custom-file-label" for="image">Choose File</label>
+                                                        <input type="file" name="site_logo" class="custom-file-input"
+                                                            id="site_logo">
+                                                        <label class="custom-file-label" for="logo">Choose File</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-4 text-right">
                                                     <div
                                                         style="max-width: 100px; max-height:100px; overflow:hidden; margin-left: auto">
-                                                        <img src="{{ asset($setting->image) }}" class="img-fluid"
+                                                        <img src="{{ asset($setting->site_logo) }}" class="img-fluid"
                                                             alt="">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Description</label>
-                                            <textarea name="description" id="description" rows="4" class="form-control"
+                                            <label for="description">Site Description</label>
+                                            <textarea name="description" id="description" rows="3" class="form-control"
                                                 placeholder="Enter Description">{{ $setting->description }}</textarea>
                                         </div>
                                         <div class="form-group">
@@ -84,20 +132,4 @@
     </div>
 </div>
 
-@endsection
-
-@section('style')
-<link rel="stylesheet" href="{{ asset('/admin/css/summernote-bs4.min.css') }}">
-@endsection
-
-@section('script')
-<script src="{{ asset('/admin/js/summernote-bs4.min.js') }}"></script>
-<script>
-    $('#description').summernote({
-        placeholder: 'Enter Description Here',
-        tabsize: 2,
-        height: 300
-    });
-
-</script>
 @endsection

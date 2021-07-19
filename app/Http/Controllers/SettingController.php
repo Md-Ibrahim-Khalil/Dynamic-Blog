@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Setting;
+use Session;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -70,7 +71,25 @@ class SettingController extends Controller
      */
     public function update(Request $request, Setting $setting)
     {
-        //
+        // dd($request->all());
+        $this->validate($request, [
+            'name' => 'required',
+            'copyright' => 'required',
+        ]);
+
+        $setting = Setting::first();
+        $setting->update($request->all());
+
+        if ($request->hasFile('site_logo')) {
+            $image = $request->site_logo;
+            $image_new_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->move('storage/setting/', $image_new_name);
+            $setting->site_logo = '/storage/setting/' . $image_new_name;
+            $setting->save();
+        }
+
+        Session::flash('success', 'Setting Updated Successfully');
+        return redirect()->back();
     }
 
     /**
