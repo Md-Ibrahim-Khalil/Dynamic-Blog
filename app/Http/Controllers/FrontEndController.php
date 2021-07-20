@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use App\Category;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -28,7 +29,8 @@ class FrontEndController extends Controller
 
     public function about()
     {
-        return view('website.about');
+        $user = User::first();
+        return view('website.about', compact('user'));
     }
 
     public function category($slug)
