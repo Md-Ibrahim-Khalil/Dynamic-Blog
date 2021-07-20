@@ -92,6 +92,22 @@
                                                         placeholder="Copyright">
                                                 </div>
                                             </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="email">Contact Phone Number</label>
+                                                    <input type="text" class="form-control" id="phone"
+                                                        value="{{ $setting->phone }}" name="phone"
+                                                        placeholder="Phone Number">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="address">Location</label>
+                                                    <input type="address" class="form-control" id="address"
+                                                        value="{{ $setting->address }}" name="address"
+                                                        placeholder="Enter Your Address">
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
