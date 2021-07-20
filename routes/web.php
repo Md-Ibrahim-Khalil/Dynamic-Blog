@@ -26,6 +26,8 @@ Route::get('/category/{slug}', 'FrontEndController@category')->name('website.cat
 Route::get('/contact', 'FrontEndController@contact')->name('website.contact');
 Route::get('/post/{slug}', 'FrontEndController@post')->name('website.post');
 
+Route::post('/contact', 'FrontEndController@send_message')->name('website.contact');
+
 
 //Admin Panel Routes
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
