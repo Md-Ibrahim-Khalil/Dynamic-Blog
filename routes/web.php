@@ -47,4 +47,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     //Setting
     Route::get('setting', 'SettingController@edit')->name('setting.index');
     Route::post('setting', 'SettingController@update')->name('setting.update');
+
+    //contact
+    Route::get('/contact', 'ContactController@index')->name('contact.index');
+    Route::get('/contact/show/{id}', 'ContactController@show')->name('contact.show');
+    Route::delete('/contact/delete/{id}', 'ContactController@destroy')->name('contact.destroy');
 });
