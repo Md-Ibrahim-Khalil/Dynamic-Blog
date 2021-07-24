@@ -64,7 +64,7 @@
                         data-accordion="false">
                         
                         <li class="nav-item">
-                            <a href="{{ route('dashboard') }}" class="nav-link">
+                            <a href="{{ route('dashboard') }}" class="nav-link {{ (request()->is('admin/dashboard')) ? 'active': '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -73,7 +73,7 @@
                             </a>        
                         </li>
                         <li class="nav-item mt-auto">
-                            <a href="{{ route('category.index') }}" class="nav-link">
+                            <a href="{{ route('category.index') }}" class="nav-link {{ (request()->is('admin/category*')) ? 'active': '' }}">
                                 <i class="nav-icon fas fa-tags"> </i>
                                 <p>
                                     Categories
@@ -81,7 +81,7 @@
                             </a>
                         </li>
                         <li class="nav-item mt-auto">
-                            <a href="{{ route('tag.index') }}" class="nav-link">
+                            <a href="{{ route('tag.index') }}" class="nav-link {{ (request()->is('admin/tag*')) ? 'active': '' }}">
                                 <i class="nav-icon fas fa-tag"> </i>
                                 <p>
                                     Tags
@@ -89,7 +89,7 @@
                             </a>
                         </li>
                         <li class="nav-item mt-auto">
-                            <a href="{{ route('post.index') }}" class="nav-link">
+                            <a href="{{ route('post.index') }}" class="nav-link {{ (request()->is('admin/post*')) ? 'active': '' }}">
                                 <i class="nav-icon fas fa-pen-square"> </i>
                                 <p>
                                     Post
@@ -97,7 +97,7 @@
                             </a>
                         </li>
                         <li class="nav-item mt-auto">
-                            <a href="{{ route('contact.index') }}" class="nav-link">
+                            <a href="{{ route('contact.index') }}" class="nav-link {{ (request()->is('admin/contact*')) ? 'active': '' }}">
                                 <i class="nav-icon fas fa-envelope"> </i>
                                 <p>
                                     Messages
@@ -105,7 +105,7 @@
                             </a>
                         </li>
                         <li class="nav-item mt-auto">
-                            <a href="{{ route('user.index') }}" class="nav-link">
+                            <a href="{{ route('user.index') }}" class="nav-link {{ (request()->is('admin/user*')) ? 'active': '' }}">
                                 <i class="nav-icon fas fa-user"> </i>
                                 <p>
                                     User
@@ -113,7 +113,7 @@
                             </a>
                         </li>
                         <li class="nav-item mt-auto">
-                            <a href="{{ route('setting.index') }}" class="nav-link">
+                            <a href="{{ route('setting.index') }}" class="nav-link {{ (request()->is('admin/setting*')) ? 'active': '' }}">
                                 <i class="nav-icon fas fa-cog"> </i>
                                 <p>
                                     Setting
@@ -122,7 +122,7 @@
                         </li>
                         <li class="nav-header">Your Account</li>
                         <li class="nav-item mt-auto">
-                            <a href="{{ route('user.profile') }}" class="nav-link">
+                            <a href="{{ route('user.profile') }}" class="nav-link {{ (request()->is('admin/profile*')) ? 'active': '' }}">
                                 <i class="nav-icon far fa-user"> </i>
                                 <p>Your Profile</p>
                             </a>
