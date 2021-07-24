@@ -143,6 +143,7 @@
     <script src="{{ asset('website') }}/js/aos.js"></script>
 
     <script src="{{ asset('website') }}/js/main.js"></script>
+    @yield('script')
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async="" src="../../gtag/js.js?id=UA-23581568-13"></script>

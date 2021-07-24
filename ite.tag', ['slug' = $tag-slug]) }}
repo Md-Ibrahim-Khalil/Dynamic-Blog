@@ -1,0 +1,64 @@
+[1mdiff --git a/app/Http/Controllers/FrontEndController.php b/app/Http/Controllers/FrontEndController.php[m
+[1mindex 7eba83d..5efcfbb 100644[m
+[1m--- a/app/Http/Controllers/FrontEndController.php[m
+[1m+++ b/app/Http/Controllers/FrontEndController.php[m
+[36m@@ -46,6 +46,19 @@[m [mclass FrontEndController extends Controller[m
+         }[m
+     }[m
+ [m
+[32m+[m[32m    public function tag($slug)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        $tag = Tag::where('slug', $slug)->first();[m
+[32m+[m[32m        if ($tag) {[m
+[32m+[m[32m            $posts = $tag->posts()->orderBy('created_at', 'desc')->paginate(9);[m
+[32m+[m[32m            // return $posts;[m
+[32m+[m
+[32m+[m[32m            return view('website.tag', compact(['tag', 'posts']));[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m            return redirect()->route('website');[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m
+     public function contact()[m
+     {[m
+         return view('website.contact');[m
+[1mdiff --git a/app/Tag.php b/app/Tag.php[m
+[1mindex 31eb80a..248bf46 100644[m
+[1m--- a/app/Tag.php[m
+[1m+++ b/app/Tag.php[m
+[36m@@ -7,4 +7,9 @@[m [muse Illuminate\Database\Eloquent\Model;[m
+ class Tag extends Model[m
+ {[m
+     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];[m
+[32m+[m
+[32m+[m[32m    public function posts()[m
+[32m+[m[32m    {[m
+[32m+[m[32m        return $this->belongsToMany(Post::class);[m
+[32m+[m[32m    }[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/resources/views/website/post.blade.php b/resources/views/website/post.blade.php[m
+[1mindex f166f5a..6411044 100644[m
+[1m--- a/resources/views/website/post.blade.php[m
+[1m+++ b/resources/views/website/post.blade.php[m
+[36m@@ -220,7 +220,7 @@[m
+             <h3 class="heading">Tags</h3>[m
+             <ul class="tags">[m
+                 @foreach ($tags as $tag)[m
+[31m-                    <li><a href="#">{{ $tag->name }}</a></li>[m
+[32m+[m[32m                    <li><a href="{{ route('website.tag', ['slug' => $tag->slug]) }}">{{ $tag->name }}</a></li>[m
+                 @endforeach[m
+             </ul>[m
+           </div>[m
+[1mdiff --git a/routes/web.php b/routes/web.php[m
+[1mindex 66bafed..3e1cdbe 100644[m
+[1m--- a/routes/web.php[m
+[1m+++ b/routes/web.php[m
+[36m@@ -23,6 +23,7 @@[m [mRoute::get('/home', 'HomeController@index')->name('home');[m
+ Route::get('/', 'FrontEndController@home')->name('website');[m
+ Route::get('/about', 'FrontEndController@about')->name('website.about');[m
+ Route::get('/category/{slug}', 'FrontEndController@category')->name('website.category');[m
+[32m+[m[32mRoute::get('/tag/{slug}', 'FrontEndController@tag')->name('website.tag');[m
+ Route::get('/contact', 'FrontEndController@contact')->name('website.contact');[m
+ Route::get('/post/{slug}', 'FrontEndController@post')->name('website.post');[m
+ [m

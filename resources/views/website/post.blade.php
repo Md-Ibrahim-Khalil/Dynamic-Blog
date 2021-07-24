@@ -42,8 +42,10 @@
 
 
           <div class="pt-5">
-            <h3 class="mb-5">6 Comments</h3>
-            <ul class="comment-list">
+            {{-- <h3 class="mb-5" id="dsq-count-scr">Comments</h3> --}}
+            <a href="{{ route('website.post', ['slug' => $post->slug]) }}#disqus_thread">Comments</a>
+            <div id="disqus_thread"></div>
+            {{-- <ul class="comment-list">
               <li class="comment">
                 <div class="vcard">
                   <img src="@if($post->user->image) {{ $post->user->image }} @else {{ asset('website/images/user.png') }} @endif" alt="Image placeholder">
@@ -122,10 +124,10 @@
                   <p><a href="#" class="reply rounded">Reply</a></p>
                 </div>
               </li>
-            </ul>
-            <!-- END comment-list -->
+            </ul> --}}
+            {{-- <!-- END comment-list --> --}}
             
-            <div class="comment-form-wrap pt-5">
+            {{-- <div class="comment-form-wrap pt-5">
               <h3 class="mb-5">Leave a comment</h3>
               <form action="#" class="p-5 bg-light">
                 <div class="form-group">
@@ -150,7 +152,7 @@
                 </div>
 
               </form>
-            </div>
+            </div> --}}
           </div>
 
         </div>
@@ -312,4 +314,18 @@
     <script id="dsq-count-scr" src="//laravel-blog-tutorial-series.disqus.com/count.js" async></script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
             Disqus.</a></noscript>
+@endsection
+
+@section('script')
+  <script>
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://imran-fahad-blog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <script id="dsq-count-scr" src="//imran-fahad-blog.disqus.com/count.js" async></script>
+{{-- <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> --}}
+
 @endsection
